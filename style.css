@@ -217,4 +217,11 @@ input[type="file"] { margin-top: 10px; width: 80%; max-width: 300px; }
 #progress-list .preview-item div {
     flex: 1;
     text-align: left;
+
+}
+.home-logo {
+    width: 150px;   /* ajusta se quiseres maior ou menor */
+    height: auto;
+    margin: 10px 0;
+    border-radius: 12px; /* opcional */
 }
