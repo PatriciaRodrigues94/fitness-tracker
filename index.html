@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Fitness Tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00688B">
+</head>
+
+<body>
+
+<!-- HOME -->
+<div id="home" class="screen active">
+    <h1>Fitness Tracker</h1>
+    <p class="subtitle">Escolha uma opção</p>
+
+    <button class="btn-treino" onclick="openScreen('screen1')">Plano de Treino</button>
+    <button class="btn-alimentar" onclick="openScreen('screen2')">Plano Alimentar</button>
+    <button class="btn-progresso" onclick="openScreen('screen3')">Progresso</button>
+</div>
+
+<!-- PLANO DE TREINO -->
+<div id="screen1" class="screen">
+    <h1>Plano de Treino</h1>
+
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab('dia1', this)">Dia 1</button>
+        <button class="tab-button" onclick="openTab('dia2', this)">Dia 2</button>
+        <button class="tab-button" onclick="openTab('dia3', this)">Dia 3</button>
+    </div>
+
+    <div id="dia1" class="tab-content active">
+        <p>Carregue fotos ou vídeos para o Dia 1:</p>
+        <input type="file" accept="image/*,video/*" multiple onchange="previewFiles(this, 'dia1')">
+        <div id="preview-dia1" class="preview-container"></div>
+    </div>
+
+    <div id="dia2" class="tab-content">
+        <p>Carregue fotos ou vídeos para o Dia 2:</p>
+        <input type="file" accept="image/*,video/*" multiple onchange="previewFiles(this, 'dia2')">
+        <div id="preview-dia2" class="preview-container"></div>
+    </div>
+
+    <div id="dia3" class="tab-content">
+        <p>Carregue fotos ou vídeos para o Dia 3:</p>
+        <input type="file" accept="image/*,video/*" multiple onchange="previewFiles(this, 'dia3')">
+        <div id="preview-dia3" class="preview-container"></div>
+    </div>
+
+    <button class="back" onclick="openScreen('home')">⬅ Voltar</button>
+</div>
+
+<!-- PLANO ALIMENTAR -->
+<div id="screen2" class="screen">
+    <h1>Plano Alimentar</h1>
+    <p>Conteúdo do segundo ecrã.</p>
+    <button class="back" onclick="openScreen('home')">⬅ Voltar</button>
+</div>
+
+<!-- PROGRESSO -->
+<div id="screen3" class="screen">
+    <h1>Progresso</h1>
+
+    <canvas id="weightChart" width="400" height="150"></canvas>
+
+    <button id="add-record-btn" class="btn-progresso">➕ Adicionar Registo</button>
+
+    <form id="progress-form" style="display:none;">
+        <label>Data:</label>
+        <input type="date" id="date" required>
+
+        <label>Peso (kg):</label>
+        <input type="number" id="weight" step="0.1" required>
+
+        <label>Observações:</label>
+        <textarea id="notes" rows="2"></textarea>
+
+        <button type="submit">Guardar</button>
+        <button type="button" id="cancel-btn" style="background:#ef4444;">Cancelar</button>
+    </form>
+
+    <div id="progress-list" class="preview-container"></div>
+
+    <button class="back" onclick="openScreen('home')">⬅ Voltar</button>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+    <div class="lightbox-content">
+        <button class="lightbox-close" onclick="closeLightbox()">×</button>
+        <h2 id="lightbox-title"></h2>
+        <img id="lightbox-img" style="display:none;">
+        <video id="lightbox-video" controls style="display:none;"></video>
+        <textarea id="lightbox-notes" rows="4" placeholder="Notas"></textarea>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+}
+</script>
+
+</body>
+</html>
